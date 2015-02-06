@@ -190,6 +190,20 @@ extern void eb_syslog(int pri, const char *fmt, ...);
 		if ( ldap_syslog & (level) ) \
 			syslog( LDAP_LEVEL_MASK((severity)), (fmt), (arg1), (arg2), (arg3), (arg4), (arg5) ); \
 	} while ( 0 )
+#define Log6( level, severity, fmt, arg1, arg2, arg3, arg4, arg5, arg6 ) \
+	do { \
+		if ( ldap_debug & (level) ) \
+			lutil_debug( ldap_debug, (level), (fmt), (arg1), (arg2), (arg3), (arg4), (arg5), (arg6) ); \
+		if ( ldap_syslog & (level) ) \
+			syslog( LDAP_LEVEL_MASK((severity)), (fmt), (arg1), (arg2), (arg3), (arg4), (arg5), (arg6) ); \
+	} while ( 0 )
+#define Log7( level, severity, fmt, arg1, arg2, arg3, arg4, arg5, arg6, arg7 ) \
+	do { \
+		if ( ldap_debug & (level) ) \
+			lutil_debug( ldap_debug, (level), (fmt), (arg1), (arg2), (arg3), (arg4), (arg5), (arg6), (arg7) ); \
+		if ( ldap_syslog & (level) ) \
+			syslog( LDAP_LEVEL_MASK((severity)), (fmt), (arg1), (arg2), (arg3), (arg4), (arg5), (arg6), (arg7) ); \
+	} while ( 0 )
 #define Debug( level, fmt, arg1, arg2, arg3 )	\
 	Log3( (level), ldap_syslog_level, (fmt), (arg1), (arg2), (arg3) )
 #define LogTest(level) ( ( ldap_debug | ldap_syslog ) & (level) )
