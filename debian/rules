@@ -1,0 +1,77 @@
+#!/usr/bin/make -f
+
+# Ensure rpath is set correctly
+export DEB_LDFLAGS_MAINT_APPEND=-L/opt/zimbra/common/lib -Wl,-rpath,/opt/zimbra/common/lib
+export DEB_CFLAGS_MAINT_STRIP=-O2
+export DEB_CFLAGS_MAINT_APPEND=-O0 -D_REENTRANT
+export DEB_CPPFLAGS_MAINT_APPEND=-I/opt/zimbra/common/include
+
+MAKEVARS        := STRIP=
+
+%:
+	dh $@
+override_dh_auto_configure:
+	./configure --prefix=/opt/zimbra/common \
+	--with-cyrus-sasl \
+	--with-tls=openssl \
+	--enable-dynamic \
+	--enable-slapd \
+	--enable-modules \
+	--enable-backends=mod \
+		--disable-shell \
+		--disable-sql \
+		--disable-bdb \
+		--disable-hdb \
+		--disable-ndb \
+		--disable-perl \
+	--enable-overlays=mod \
+	--enable-debug \
+	--enable-spasswd \
+	--localstatedir=/opt/zimbra/data/ldap/state \
+	--enable-crypt
+	
+override_dh_strip:
+	dh_strip -pzimbra-openldap-lib --dbg-package=zimbra-openldap-lib-dbg
+	dh_strip -pzimbra-openldap-server --dbg-package=zimbra-openldap-server-dbg
+	dh_strip -pzimbra-openldap-client --dbg-package=zimbra-openldap-client-dbg
+	dh_strip -pzimbra-lmdb-lib --dbg-package=zimbra-lmdb-lib-dbg
+	dh_strip -pzimbra-lmdb --dbg-package=zimbra-lmdb-dbg
+	dh_strip -Nzimbra-openldap-lib -Nzimbra-openldap-server -Nzimbra-openldap-client -Nzimbra-lmdb-lib -Nzimbra-lmdb
+
+override_dh_auto_build:
+	dh_auto_build -- $(MAKEVARS)
+	make -C libraries/liblmdb prefix=/opt/zimbra/common $(MAKEVARS)
+	make -C contrib/slapd-modules/noopsrch prefix=/opt/zimbra/common $(MAKEVARS)
+	make -C contrib/slapd-modules/passwd/sha2 prefix=/opt/zimbra/common $(MAKEVARS)
+
+override_dh_auto_install:
+	make install DESTDIR=$$(pwd)/debian/tmp STRIP=""
+	make -C libraries/liblmdb install prefix=/opt/zimbra/common $(MAKEVARS) DESTDIR=$$(pwd)/debian/tmp STRIP=""
+	make -C contrib/slapd-modules/noopsrch install prefix=/opt/zimbra/common $(MAKEVARS) DESTDIR=$$(pwd)/debian/tmp STRIP=""
+	make -C contrib/slapd-modules/passwd/sha2 install prefix=/opt/zimbra/common $(MAKEVARS) DESTDIR=$$(pwd)/debian/tmp STRIP=""
+	rm -rf $$(pwd)/debian/tmp/opt/zimbra/data
+	rm -f $$(pwd)/debian/tmp/opt/zimbra/common/libexec/openldap/noopsrch.a
+	rm -f $$(pwd)/debian/tmp/opt/zimbra/common/libexec/openldap/pw-sha2.a
+	rm -f $$(pwd)/debian/tmp/opt/zimbra/common/etc/openldap/DB_CONFIG.example
+	chmod 755 $$(pwd)/debian/tmp/opt/zimbra/common/libexec/openldap/pw-sha2.la $$(pwd)/debian/tmp/opt/zimbra/common/libexec/openldap/noopsrch.la
+
+override_dh_install:
+	dh_install
+	rm -f $(CURDIR)/debian/zimbra-openldap-dev/opt/zimbra/common/include/lmdb.h
+	rm -f $(CURDIR)/debian/zimbra-openldap-dev/opt/zimbra/common/lib/liblmdb.a
+	rm -f $(CURDIR)/debian/zimbra-openldap-dev/opt/zimbra/common/lib/liblmdb.so
+	rm -f $(CURDIR)/debian/zimbra-openldap-server/opt/zimbra/common/etc/openldap/ldap.conf
+	rm -f $(CURDIR)/debian/zimbra-openldap-server/opt/zimbra/common/etc/openldap/ldap.conf.default
+	rm -f $(CURDIR)/debian/zimbra-openldap-server/opt/zimbra/common/share/man/man5/ldif.5
+	rm -f $(CURDIR)/debian/zimbra-openldap-server/opt/zimbra/common/share/man/man5/ldap.conf.5
+	rm -rf $(CURDIR)/debian/zimbra-openldap-server/opt/zimbra/common/share/man/man1
+	rm -f $(CURDIR)/debian/zimbra-openldap-client/opt/zimbra/common/bin/mdb_copy
+	rm -f $(CURDIR)/debian/zimbra-openldap-client/opt/zimbra/common/bin/mdb_dump
+	rm -f $(CURDIR)/debian/zimbra-openldap-client/opt/zimbra/common/bin/mdb_load
+	rm -f $(CURDIR)/debian/zimbra-openldap-client/opt/zimbra/common/bin/mdb_stat
+	rm -f $(CURDIR)/debian/zimbra-openldap-client/opt/zimbra/common/share/man/man1/mdb_copy.1
+	rm -f $(CURDIR)/debian/zimbra-openldap-client/opt/zimbra/common/share/man/man1/mdb_dump.1
+	rm -f $(CURDIR)/debian/zimbra-openldap-client/opt/zimbra/common/share/man/man1/mdb_load.1
+	rm -f $(CURDIR)/debian/zimbra-openldap-client/opt/zimbra/common/share/man/man1/mdb_stat.1
+	rm -f $(CURDIR)/debian/zimbra-openldap-lib/opt/zimbra/common/lib/liblmdb.so.0.0.0
+	rm -f $(CURDIR)/debian/zimbra-openldap-lib/opt/zimbra/common/lib/liblmdb.so.0
