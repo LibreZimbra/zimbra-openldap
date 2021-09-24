@@ -1,0 +1,17 @@
+/.debhelper
+/files
+*.log
+*.substvars
+/tmp
+/zimbra-lmdb
+/zimbra-lmdb-dbg
+/zimbra-lmdb-dev
+/zimbra-lmdb-lib
+/zimbra-lmdb-lib-dbg
+/zimbra-openldap-client
+/zimbra-openldap-client-dbg
+/zimbra-openldap-dev
+/zimbra-openldap-lib
+/zimbra-openldap-lib-dbg
+/zimbra-openldap-server
+/zimbra-openldap-server-dbg
