@@ -741,7 +741,7 @@ equality_candidates(
 		&db, &mask, &prefix );
 
 	if ( rc == LDAP_INAPPROPRIATE_MATCHING ) {
-		Debug( LDAP_DEBUG_ANY,
+		Debug( LDAP_DEBUG_TRACE,
 			"<= bdb_equality_candidates: (%s) not indexed\n", 
 			ava->aa_desc->ad_cname.bv_val, 0, 0 );
 		return 0;
@@ -858,7 +858,7 @@ approx_candidates(
 		&db, &mask, &prefix );
 
 	if ( rc == LDAP_INAPPROPRIATE_MATCHING ) {
-		Debug( LDAP_DEBUG_ANY,
+		Debug( LDAP_DEBUG_TRACE,
 			"<= bdb_approx_candidates: (%s) not indexed\n",
 			ava->aa_desc->ad_cname.bv_val, 0, 0 );
 		return 0;
@@ -978,7 +978,7 @@ substring_candidates(
 		&db, &mask, &prefix );
 
 	if ( rc == LDAP_INAPPROPRIATE_MATCHING ) {
-		Debug( LDAP_DEBUG_ANY,
+		Debug( LDAP_DEBUG_TRACE,
 			"<= bdb_substring_candidates: (%s) not indexed\n",
 			sub->sa_desc->ad_cname.bv_val, 0, 0 );
 		return 0;
@@ -1095,14 +1095,14 @@ inequality_candidates(
 		&db, &mask, &prefix );
 
 	if ( rc == LDAP_INAPPROPRIATE_MATCHING ) {
-		Debug( LDAP_DEBUG_ANY,
+		Debug( LDAP_DEBUG_TRACE,
 			"<= bdb_inequality_candidates: (%s) not indexed\n", 
 			ava->aa_desc->ad_cname.bv_val, 0, 0 );
 		return 0;
 	}
 
 	if( rc != LDAP_SUCCESS ) {
-		Debug( LDAP_DEBUG_ANY,
+		Debug( LDAP_DEBUG_TRACE,
 			"<= bdb_inequality_candidates: (%s) "
 			"index_param failed (%d)\n",
 			ava->aa_desc->ad_cname.bv_val, rc, 0 );
