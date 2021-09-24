@@ -427,6 +427,9 @@ LDAP_F (int) ldap_pvt_tls_get_peer_dn LDAP_P(( void *ctx, struct berval *dn,
 	LDAPDN_rewrite_dummy *func, unsigned flags ));
 LDAP_F (int) ldap_pvt_tls_get_strength LDAP_P(( void *ctx ));
 
+LDAP_F (const char *) ldap_pvt_tls_get_version LDAP_P(( void *ctx ));
+LDAP_F (const char *) ldap_pvt_tls_get_cipher LDAP_P(( void *ctx ));
+
 LDAP_END_DECL
 
 /*

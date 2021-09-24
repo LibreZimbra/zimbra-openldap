@@ -671,6 +671,20 @@ tlsg_session_strength( tls_session *session )
 	return gnutls_cipher_get_key_size( c ) * 8;
 }
 
+static const char *
+tlsg_session_version( tls_session *sess )
+{
+	tlsg_session *s = (tlsg_session *)sess;
+	return gnutls_protocol_get_name(gnutls_protocol_get_version( s->session ));
+}
+
+static const char *
+tlsg_session_cipher( tls_session *sess )
+{
+	tlsg_session *s = (tlsg_session *)sess;
+	return gnutls_cipher_get_name(gnutls_cipher_get( s->session ));
+}
+
 /* suites is a string of colon-separated cipher suite names. */
 static int
 tlsg_parse_ciphers( tlsg_ctx *ctx, char *suites )
@@ -927,6 +941,8 @@ tls_impl ldap_int_tls_impl = {
 	tlsg_session_peer_dn,
 	tlsg_session_chkhost,
 	tlsg_session_strength,
+	tlsg_session_version,
+	tlsg_session_cipher,
 
 	&tlsg_sbio,
 

@@ -628,6 +628,14 @@ must be
 and its contents need to be freed by the caller using
 .BR ldap_memfree (3).
 .TP
+.B LDAP_OPT_X_TLS_CIPHER
+Gets the cipher being used on an established TLS session.
+.BR outvalue
+must be
+.BR "char **" ,
+and its contents need to be freed by the caller using
+.BR ldap_memfree (3).
+.TP
 .B LDAP_OPT_X_TLS_CIPHER_SUITE
 Sets/gets the allowed cipher suite.
 .BR invalue
@@ -772,6 +780,14 @@ must be
 When using the OpenSSL library this is an SSL*. When using other
 crypto libraries this is a pointer to an OpenLDAP private structure.
 Applications generally should not use this option.
+.TP
+.B LDAP_OPT_X_TLS_VERSION
+Gets the TLS version being used on an established TLS session.
+.BR outvalue
+must be
+.BR "char **" ,
+and its contents need to be freed by the caller using
+.BR ldap_memfree (3).
 .SH ERRORS
 On success, the functions return
 .BR LDAP_OPT_SUCCESS ,

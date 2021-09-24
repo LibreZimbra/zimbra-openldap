@@ -756,6 +756,20 @@ tlso_session_strength( tls_session *sess )
 	return SSL_CIPHER_get_bits(SSL_get_current_cipher(s), NULL);
 }
 
+static const char *
+tlso_session_version( tls_session *sess )
+{
+	tlso_session *s = (tlso_session *)sess;
+	return SSL_get_version(s);
+}
+
+static const char *
+tlso_session_cipher( tls_session *sess )
+{
+	tlso_session *s = (tlso_session *)sess;
+	return SSL_CIPHER_get_name(SSL_get_current_cipher(s));
+}
+
 /*
  * TLS support for LBER Sockbufs
  */
@@ -1273,6 +1287,8 @@ tls_impl ldap_int_tls_impl = {
 	tlso_session_peer_dn,
 	tlso_session_chkhost,
 	tlso_session_strength,
+	tlso_session_version,
+	tlso_session_cipher,
 
 	&tlso_sbio,
 
