@@ -708,6 +708,7 @@ dn2entry_retry:
 	}
 
 	wwctx.flag = 0;
+	wwctx.nentries = 0;
 	/* If we're running in our own read txn */
 	if (  moi == &opinfo ) {
 		cb.sc_writewait = mdb_writewait;
@@ -921,7 +922,7 @@ notfound:
 				goto done;
 			}
 
-			rs->sr_err = mdb_entry_decode( op, ltid, &edata, &e );
+			rs->sr_err = mdb_entry_decode( op, ltid, &edata, id, &e );
 			if ( rs->sr_err ) {
 				rs->sr_err = LDAP_OTHER;
 				rs->sr_text = "internal error in mdb_entry_decode";
