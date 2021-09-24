@@ -39,6 +39,7 @@ mandir = $(datarootdir)/man
 
 IHDRS	= lmdb.h
 ILIBS	= liblmdb.a liblmdb$(SOEXT)
+ELIBS	= liblmdb.so.0 liblmdb.so.0.0.0
 IPROGS	= mdb_stat mdb_copy mdb_dump mdb_load
 IDOCS	= mdb_stat.1 mdb_copy.1 mdb_dump.1 mdb_load.1
 PROGS	= $(IPROGS) mtest mtest2 mtest3 mtest4 mtest5
@@ -51,11 +52,12 @@ install: $(ILIBS) $(IPROGS) $(IHDRS)
 	mkdir -p $(DESTDIR)$(mandir)/man1
 	for f in $(IPROGS); do cp $$f $(DESTDIR)$(bindir); done
 	for f in $(ILIBS); do cp $$f $(DESTDIR)$(libdir); done
+	for f in $(ELIBS); do cp $$f $(DESTDIR)$(libdir); done
 	for f in $(IHDRS); do cp $$f $(DESTDIR)$(includedir); done
 	for f in $(IDOCS); do cp $$f $(DESTDIR)$(mandir)/man1; done
 
 clean:
-	rm -rf $(PROGS) *.[ao] *.[ls]o *~ testdb
+	rm -rf $(PROGS) *.[ao] *.[ls]o *.so.* *~ testdb
 
 test:	all
 	rm -rf testdb && mkdir testdb
@@ -66,7 +68,9 @@ liblmdb.a:	mdb.o midl.o
 
 liblmdb$(SOEXT):	mdb.lo midl.lo
 #	$(CC) $(LDFLAGS) -pthread -shared -Wl,-Bsymbolic -o $@ mdb.o midl.o $(SOLIBS)
-	$(CC) $(LDFLAGS) -pthread -shared -o $@ mdb.lo midl.lo $(SOLIBS)
+	$(CC) $(LDFLAGS) -Wl,-soname,liblmdb.so.0 -pthread -shared -o $@.0.0.0 mdb.lo midl.lo $(SOLIBS)
+	ln -s $@.0.0.0 $@.0
+	ln -s $@.0.0.0 $@
 
 mdb_stat: mdb_stat.o liblmdb.a
 mdb_copy: mdb_copy.o liblmdb.a
