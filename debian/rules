@@ -5,6 +5,7 @@ export DEB_LDFLAGS_MAINT_APPEND=-L/opt/zimbra/common/lib -Wl,-rpath,/opt/zimbra/
 export DEB_CFLAGS_MAINT_STRIP=-O2
 export DEB_CFLAGS_MAINT_APPEND=-O0 -D_REENTRANT
 export DEB_CPPFLAGS_MAINT_APPEND=-I/opt/zimbra/common/include
+export DEB_BUILD_OPTIONS=nocheck
 
 MAKEVARS        := STRIP=
 
