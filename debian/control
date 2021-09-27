@@ -11,8 +11,7 @@ Homepage: http://www.openldap.org/
 Package: zimbra-openldap-server
 Priority: optional
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, zimbra-openldap-lib (= ${binary:Version}),
- zimbra-ldap-base
+Depends: ${shlibs:Depends}, ${misc:Depends}, zimbra-openldap-lib (= ${binary:Version})
 Description: OpenLDAP Server Binaries
 
 Package: zimbra-openldap-server-dbg
@@ -42,7 +41,7 @@ Section: libs
 Priority: important
 Architecture: any
 Multi-Arch: same
-Depends: ${shlibs:Depends}, ${misc:Depends}, zimbra-base
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: OpenLDAP Libraries
 
 Package: zimbra-openldap-lib-dbg
@@ -64,7 +63,7 @@ Description: OpenLDAP development pieces
 Package: zimbra-lmdb
 Priority: optional
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, zimbra-ldap-base
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: LMDB Binaries
 
 Package: zimbra-lmdb-dbg
@@ -80,7 +79,7 @@ Section: libs
 Priority: important
 Architecture: any
 Multi-Arch: same
-Depends: ${shlibs:Depends}, ${misc:Depends}, zimbra-base
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: LMDB Libraries
 
 Package: zimbra-lmdb-lib-dbg
