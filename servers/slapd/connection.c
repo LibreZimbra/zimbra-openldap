@@ -263,7 +263,7 @@ static Connection* connection_get( ber_socket_t s )
 {
 	Connection *c;
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"connection_get(%ld)\n",
 		(long) s, 0, 0 );
 

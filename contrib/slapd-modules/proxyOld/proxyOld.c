@@ -91,8 +91,7 @@ proxyOld_parse(
 				op->o_connid, 0, 0 );
 		authzDN.bv_val = ch_strdup("");
 	} else {
-		Debug( LDAP_DEBUG_ARGS,
-			"proxyOld_parse: conn %lu ctrl DN=\"%s\"\n",
+		Debug_Args("proxyOld_parse: conn %lu ctrl DN=\"%s\"\n",
 				op->o_connid, dn.bv_val, 0 );
 		rc = dnNormalize( 0, NULL, NULL, &dn, &authzDN, op->o_tmpmemctx );
 		if ( rc != LDAP_SUCCESS ) {

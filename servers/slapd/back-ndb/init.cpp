@@ -111,7 +111,7 @@ ndb_db_open( BackendDB *be, ConfigReply *cr )
 		return -1;
 	}
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		LDAP_XSTRING(ndb_db_open) ": \"%s\"\n",
 		be->be_suffix[0].bv_val, 0, 0 );
 

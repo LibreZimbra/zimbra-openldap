@@ -71,7 +71,7 @@ ldap_back_munge_filter(
 	char *ptr;
 	int gotit = 0;
 
-	Debug( LDAP_DEBUG_ARGS, "=> ldap_back_munge_filter \"%s\"\n",
+	Debug_Args( "=> ldap_back_munge_filter \"%s\"\n",
 			filter->bv_val, 0, 0 );
 
 	for ( ptr = strchr( filter->bv_val, '(' ); 
@@ -134,7 +134,7 @@ ldap_back_munge_filter(
 		gotit++;
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "<= ldap_back_munge_filter \"%s\" (%d)\n",
+	Debug_Args( "<= ldap_back_munge_filter \"%s\" (%d)\n",
 			filter->bv_val, gotit, 0 );
 
 	return gotit;

@@ -51,7 +51,7 @@ ldap_back_add(
 
 	rs->sr_err = LDAP_SUCCESS;
 	
-	Debug( LDAP_DEBUG_ARGS, "==> ldap_back_add(\"%s\")\n",
+	Debug_Args( "==> ldap_back_add(\"%s\")\n",
 			op->o_req_dn.bv_val, 0, 0 );
 
 	if ( !ldap_back_dobind( &lc, op, rs, LDAP_BACK_SENDERR ) ) {
@@ -131,7 +131,7 @@ cleanup:
 		ldap_back_release_conn( li, lc );
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "<== ldap_back_add(\"%s\"): %d\n",
+	Debug_Args( "<== ldap_back_add(\"%s\"): %d\n",
 			op->o_req_dn.bv_val, rs->sr_err, 0 );
 
 	return rs->sr_err;

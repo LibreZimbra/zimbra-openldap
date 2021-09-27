@@ -111,7 +111,7 @@ do_modrdn(
 		op->orr_nnewSup = &nnewSuperior;
 	}
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 	    "do_modrdn: dn (%s) newrdn (%s) newsuperior (%s)\n",
 		dn.bv_val, newrdn.bv_val,
 		newSuperior.bv_len ? newSuperior.bv_val : "" );

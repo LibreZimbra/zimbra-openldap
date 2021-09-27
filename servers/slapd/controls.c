@@ -1142,7 +1142,7 @@ static int parseProxyAuthz (
 		? SLAP_CONTROL_CRITICAL
 		: SLAP_CONTROL_NONCRITICAL;
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"parseProxyAuthz: conn %lu authzid=\"%s\"\n", 
 		op->o_connid,
 		ctrl->ldctl_value.bv_len ?  ctrl->ldctl_value.bv_val : "anonymous",
@@ -1400,7 +1400,7 @@ static int parseAssert (
 #ifdef LDAP_DEBUG
 	filter2bv_x( op, op->o_assertion, &fstr );
 
-	Debug( LDAP_DEBUG_ARGS, "parseAssert: conn %ld assert: %s\n",
+	Debug_Args( "parseAssert: conn %ld assert: %s\n",
 		op->o_connid, fstr.bv_len ? fstr.bv_val : "empty" , 0 );
 	op->o_tmpfree( fstr.bv_val, op->o_tmpmemctx );
 #endif
@@ -1585,7 +1585,7 @@ static int parseValuesReturnFilter (
 		vrFilter2bv( op, op->o_vrFilter, &fstr );
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "	vrFilter: %s\n",
+	Debug_Args( "	vrFilter: %s\n",
 		fstr.bv_len ? fstr.bv_val : "empty", 0, 0 );
 	op->o_tmpfree( fstr.bv_val, op->o_tmpmemctx );
 #endif

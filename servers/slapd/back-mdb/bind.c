@@ -34,7 +34,7 @@ mdb_bind( Operation *op, SlapReply *rs )
 	MDB_txn		*rtxn;
 	mdb_op_info	opinfo = {{{0}}}, *moi = &opinfo;
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"==> " LDAP_XSTRING(mdb_bind) ": dn: %s\n",
 		op->o_req_dn.bv_val, 0, 0);
 

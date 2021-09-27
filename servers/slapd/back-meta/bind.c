@@ -67,7 +67,7 @@ meta_back_bind( Operation *op, SlapReply *rs )
 
 	rs->sr_err = LDAP_SUCCESS;
 
-	Debug( LDAP_DEBUG_ARGS, "%s meta_back_bind: dn=\"%s\".\n",
+	Debug_Args( "%s meta_back_bind: dn=\"%s\".\n",
 		op->o_log_prefix, op->o_req_dn.bv_val, 0 );
 
 	/* the test on the bind method should be superfluous */

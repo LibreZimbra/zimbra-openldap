@@ -1228,7 +1228,7 @@ static int base_candidate(
 	Entry	*e,
 	ID		*ids )
 {
-	Debug(LDAP_DEBUG_ARGS, "base_candidates: base: \"%s\" (0x%08lx)\n",
+	Debug_Args( "base_candidates: base: \"%s\" (0x%08lx)\n",
 		e->e_nname.bv_val, (long) e->e_id, 0);
 
 	ids[0] = 1;
@@ -1458,7 +1458,7 @@ send_paged_response(
 	PagedResultsCookie respcookie;
 	struct berval cookie;
 
-	Debug(LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"send_paged_response: lastid=0x%08lx nentries=%d\n", 
 		lastid ? *lastid : 0, rs->sr_nentries, NULL );
 

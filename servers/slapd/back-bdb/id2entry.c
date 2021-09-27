@@ -329,10 +329,8 @@ int bdb_entry_get(
 
 	DB_LOCK		lock;
 
-	Debug( LDAP_DEBUG_ARGS,
-		"=> bdb_entry_get: ndn: \"%s\"\n", ndn->bv_val, 0, 0 ); 
-	Debug( LDAP_DEBUG_ARGS,
-		"=> bdb_entry_get: oc: \"%s\", at: \"%s\"\n",
+	Debug_Args( "=> bdb_entry_get: ndn: \"%s\"\n", ndn->bv_val, 0, 0 );
+	Debug_Args( "=> bdb_entry_get: oc: \"%s\", at: \"%s\"\n",
 		oc ? oc->soc_cname.bv_val : "(null)", at_name, 0);
 
 	if( op ) {

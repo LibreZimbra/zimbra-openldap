@@ -78,7 +78,7 @@ ldap_back_dn_massage(
 		} else {
 			*res = *dn;
 		}
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"[rw] %s: \"%s\" -> \"%s\"\n",
 			dc->ctx,
 			BER_BVISNULL( dn ) ? "" : dn->bv_val,
@@ -171,7 +171,7 @@ ldap_back_dn_massage(
 			res->bv_val = ch_malloc( res->bv_len + 1 );
 			strncpy( res->bv_val, dn->bv_val, diff );
 			strcpy( &res->bv_val[diff], dc->target->mt_rwmap.rwm_suffix_massage[i+dst].bv_val );
-			Debug( LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"ldap_back_dn_massage:"
 				" converted \"%s\" to \"%s\"\n",
 				BER_BVISNULL( dn ) ? "" : dn->bv_val,

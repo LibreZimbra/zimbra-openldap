@@ -63,7 +63,7 @@ do_abandon( Operation *op, SlapReply *rs )
 		return rs->sr_err;
 	} 
 
-	Debug( LDAP_DEBUG_ARGS, "%s do_abandon: id=%ld\n",
+	Debug_Args( "%s do_abandon: id=%ld\n",
 		op->o_log_prefix, (long) id, 0 );
 
 	if( id <= 0 ) {

@@ -50,7 +50,7 @@ ndb_back_delete( Operation *op, SlapReply *rs )
 	LDAPControl *ctrls[SLAP_MAX_RESPONSE_CONTROLS];
 	int num_ctrls = 0;
 
-	Debug( LDAP_DEBUG_ARGS, "==> " LDAP_XSTRING(ndb_back_delete) ": %s\n",
+	Debug_Args( "==> " LDAP_XSTRING(ndb_back_delete) ": %s\n",
 		op->o_req_dn.bv_val, 0, 0 );
 
 	ctrls[num_ctrls] = 0;
@@ -131,7 +131,7 @@ retry:	/* transaction retry */
 
 	if ( rs->sr_err == LDAP_NO_SUCH_OBJECT ||
 		( !manageDSAit && bvmatch( NA.ocs, &glue_bv ))) {
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- " LDAP_XSTRING(ndb_back_delete) ": no such object %s\n",
 			op->o_req_dn.bv_val, 0, 0);
 
@@ -217,7 +217,7 @@ retry:	/* transaction retry */
 	/* Can't do it if we have kids */
 	rs->sr_err = ndb_has_children( &NA, &rc );
 	if ( rs->sr_err ) {
-		Debug(LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- " LDAP_XSTRING(ndb_back_delete)
 			": has_children failed: %s (%d)\n",
 			NA.txn->getNdbError().message, NA.txn->getNdbError().code, 0 );
@@ -226,7 +226,7 @@ retry:	/* transaction retry */
 		goto return_results;
 	}
 	if ( rc == LDAP_COMPARE_TRUE ) {
-		Debug(LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- " LDAP_XSTRING(ndb_back_delete)
 			": non-leaf %s\n",
 			op->o_req_dn.bv_val, 0, 0);

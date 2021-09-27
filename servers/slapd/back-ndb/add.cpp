@@ -47,7 +47,7 @@ ndb_back_add(Operation *op, SlapReply *rs )
 	LDAPControl *ctrls[SLAP_MAX_RESPONSE_CONTROLS];
 	int num_ctrls = 0;
 
-	Debug(LDAP_DEBUG_ARGS, "==> " LDAP_XSTRING(ndb_back_add) ": %s\n",
+	Debug_Args("==> " LDAP_XSTRING(ndb_back_add) ": %s\n",
 		op->oq_add.rs_e->e_name.bv_val, 0, 0);
 
 	ctrls[num_ctrls] = 0;

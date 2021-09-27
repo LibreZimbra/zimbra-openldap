@@ -37,7 +37,7 @@ ndb_back_bind( Operation *op, SlapReply *rs )
 
 	NdbArgs NA;
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"==> " LDAP_XSTRING(ndb_back_bind) ": dn: %s\n",
 		op->o_req_dn.bv_val, 0, 0);
 

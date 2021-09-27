@@ -49,7 +49,7 @@ bdb_add(Operation *op, SlapReply *rs )
 	int settle = 0;
 #endif
 
-	Debug(LDAP_DEBUG_ARGS, "==> " LDAP_XSTRING(bdb_add) ": %s\n",
+	Debug_Args( "==> " LDAP_XSTRING(bdb_add) ": %s\n",
 		op->ora_e->e_name.bv_val, 0, 0);
 
 #ifdef LDAP_X_TXN

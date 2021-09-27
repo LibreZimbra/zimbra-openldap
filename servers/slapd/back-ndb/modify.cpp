@@ -230,57 +230,57 @@ int ndb_modify_internal(
 
 		switch ( mod->sm_op ) {
 		case LDAP_MOD_ADD:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"ndb_modify_internal: add %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			rc = modify_add_values( NA->e, mod, get_permissiveModify(op),
 				text, textbuf, textlen );
 			if( rc != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "ndb_modify_internal: %d %s\n",
+				Debug_Args("ndb_modify_internal: %d %s\n",
 					rc, *text, 0);
 			}
 			break;
 
 		case LDAP_MOD_DELETE:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"ndb_modify_internal: delete %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			rc = ndb_modify_delete( NA->e, mod, get_permissiveModify(op),
 				text, textbuf, textlen, NULL );
 			assert( rc != LDAP_TYPE_OR_VALUE_EXISTS );
 			if( rc != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "ndb_modify_internal: %d %s\n",
+				Debug_Args("ndb_modify_internal: %d %s\n",
 					rc, *text, 0);
 			}
 			break;
 
 		case LDAP_MOD_REPLACE:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"ndb_modify_internal: replace %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			rc = modify_replace_values( NA->e, mod, get_permissiveModify(op),
 				text, textbuf, textlen );
 			if( rc != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "ndb_modify_internal: %d %s\n",
+				Debug_Args("ndb_modify_internal: %d %s\n",
 					rc, *text, 0);
 			}
 			break;
 
 		case LDAP_MOD_INCREMENT:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"ndb_modify_internal: increment %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			rc = modify_increment_values( NA->e, mod, get_permissiveModify(op),
 				text, textbuf, textlen );
 			if( rc != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS,
+				Debug_Args(
 					"ndb_modify_internal: %d %s\n",
 					rc, *text, 0);
 			}
 			break;
 
 		case SLAP_MOD_SOFTADD:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"ndb_modify_internal: softadd %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
  			mod->sm_op = LDAP_MOD_ADD;
@@ -295,13 +295,13 @@ int ndb_modify_internal(
  			}
 
 			if( rc != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "ndb_modify_internal: %d %s\n",
+				Debug_Args("ndb_modify_internal: %d %s\n",
 					rc, *text, 0);
 			}
  			break;
 
 		case SLAP_MOD_SOFTDEL:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"ndb_modify_internal: softdel %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
  			mod->sm_op = LDAP_MOD_DELETE;
@@ -316,13 +316,13 @@ int ndb_modify_internal(
  			}
 
 			if( rc != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "ndb_modify_internal: %d %s\n",
+				Debug_Args("ndb_modify_internal: %d %s\n",
 					rc, *text, 0);
 			}
  			break;
 
 		case SLAP_MOD_ADD_IF_NOT_PRESENT:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"ndb_modify_internal: add_if_not_present %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			if ( attr_find( NA->e->e_attrs, mod->sm_desc ) ) {
@@ -338,7 +338,7 @@ int ndb_modify_internal(
  			mod->sm_op = SLAP_MOD_ADD_IF_NOT_PRESENT;
 
 			if( rc != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "ndb_modify_internal: %d %s\n",
+				Debug_Args("ndb_modify_internal: %d %s\n",
 					rc, *text, 0);
 			}
  			break;
@@ -348,7 +348,7 @@ int ndb_modify_internal(
 				mod->sm_op, 0, 0);
 			*text = "Invalid modify operation";
 			rc = LDAP_OTHER;
-			Debug(LDAP_DEBUG_ARGS, "ndb_modify_internal: %d %s\n",
+			Debug_Args("ndb_modify_internal: %d %s\n",
 				rc, *text, 0);
 		}
 
@@ -480,7 +480,7 @@ ndb_back_modify( Operation *op, SlapReply *rs )
 	LDAPControl *ctrls[SLAP_MAX_RESPONSE_CONTROLS];
 	int num_ctrls = 0;
 
-	Debug( LDAP_DEBUG_ARGS, LDAP_XSTRING(ndb_back_modify) ": %s\n",
+	Debug_Args( LDAP_XSTRING(ndb_back_modify) ": %s\n",
 		op->o_req_dn.bv_val, 0, 0 );
 
 	ctrls[num_ctrls] = NULL;
@@ -535,7 +535,7 @@ retry:	/* transaction retry */
 	case 0:
 		break;
 	case LDAP_NO_SUCH_OBJECT:
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- ndb_back_modify: no such object %s\n",
 			op->o_req_dn.bv_val, 0, 0 );
 		rs->sr_matched = matched.bv_val;

@@ -179,7 +179,7 @@ rwm_dn_massage(
 		}
 		rc = LDAP_SUCCESS;
 
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"[rw] %s: \"%s\" -> \"%s\"\n",
 			dc->ctx, in_val, dn->bv_val );
 		break;

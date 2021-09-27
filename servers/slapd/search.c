@@ -118,9 +118,9 @@ do_search(
 		goto return_results;
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "SRCH \"%s\" %d %d",
+	Debug_Args("SRCH \"%s\" %d %d",
 		base.bv_val, op->ors_scope, op->ors_deref );
-	Debug( LDAP_DEBUG_ARGS, "    %d %d %d\n",
+	Debug_Args("    %d %d %d\n",
 		op->ors_slimit, op->ors_tlimit, op->ors_attrsonly);
 
 	/* filter - returns a "normalized" version */
@@ -137,7 +137,7 @@ do_search(
 	}
 	filter2bv_x( op, op->ors_filter, &op->ors_filterstr );
 	
-	Debug( LDAP_DEBUG_ARGS, "    filter: %s\n",
+	Debug_Args("    filter: %s\n",
 		!BER_BVISEMPTY( &op->ors_filterstr ) ? op->ors_filterstr.bv_val : "empty", 0, 0 );
 
 	/* attributes */
@@ -198,15 +198,15 @@ do_search(
 		goto return_results;
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "    attrs:", 0, 0, 0 );
+	Debug_Args( "    attrs:", 0, 0, 0 );
 
 	if ( siz != 0 ) {
 		for ( i = 0; i<siz; i++ ) {
-			Debug( LDAP_DEBUG_ARGS, " %s", op->ors_attrs[i].an_name.bv_val, 0, 0 );
+			Debug_Args( " %s", op->ors_attrs[i].an_name.bv_val, 0, 0 );
 		}
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "\n", 0, 0, 0 );
+	Debug_Args( "\n", 0, 0, 0 );
 
 	if ( StatslogTest( LDAP_DEBUG_STATS ) ) {
 		char abuf[BUFSIZ/2], *ptr = abuf;

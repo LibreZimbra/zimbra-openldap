@@ -54,7 +54,7 @@ ndb_back_modrdn( Operation *op, SlapReply *rs )
 
 	int	rc;
 
-	Debug( LDAP_DEBUG_ARGS, "==>" LDAP_XSTRING(ndb_back_modrdn) "(%s,%s,%s)\n",
+	Debug_Args( "==>" LDAP_XSTRING(ndb_back_modrdn) "(%s,%s,%s)\n",
 		op->o_req_dn.bv_val,op->oq_modrdn.rs_newrdn.bv_val,
 		op->oq_modrdn.rs_newSup ? op->oq_modrdn.rs_newSup->bv_val : "NULL" );
 
@@ -118,7 +118,7 @@ retry:	/* transaction retry */
 	case 0:
 		break;
 	case LDAP_NO_SUCH_OBJECT:
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- ndb_back_modrdn: no such object %s\n",
 			op->o_req_dn.bv_val, 0, 0 );
 		rs->sr_matched = matched.bv_val;
@@ -169,7 +169,7 @@ retry:	/* transaction retry */
 	/* Can't do it if we have kids */
 	rs->sr_err = ndb_has_children( &NA, &rc );
 	if ( rs->sr_err ) {
-		Debug(LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- " LDAP_XSTRING(ndb_back_modrdn)
 			": has_children failed: %s (%d)\n",
 			NA.txn->getNdbError().message, NA.txn->getNdbError().code, 0 );
@@ -178,7 +178,7 @@ retry:	/* transaction retry */
 		goto return_results;
 	}
 	if ( rc == LDAP_COMPARE_TRUE ) {
-		Debug(LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- " LDAP_XSTRING(ndb_back_modrdn)
 			": non-leaf %s\n",
 			op->o_req_dn.bv_val, 0, 0);

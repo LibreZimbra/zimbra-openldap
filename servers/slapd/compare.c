@@ -118,7 +118,7 @@ do_compare(
 
 	op->orc_ava = &ava;
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"do_compare: dn (%s) attr (%s) value (%s)\n",
 		op->o_req_dn.bv_val,
 		ava.aa_desc->ad_cname.bv_val, ava.aa_value.bv_val );

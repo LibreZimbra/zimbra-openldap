@@ -75,7 +75,7 @@ do_modify(
 		return SLAPD_DISCONNECT;
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "%s do_modify: dn (%s)\n",
+	Debug_Args( "%s do_modify: dn (%s)\n",
 		op->o_log_prefix, dn.bv_val, 0 );
 
 	rs->sr_err = slap_parse_modlist( op, rs, op->o_ber, &op->oq_modify );
@@ -105,27 +105,27 @@ do_modify(
 	op->orm_no_opattrs = 0;
 
 #ifdef LDAP_DEBUG
-	Debug( LDAP_DEBUG_ARGS, "%s modifications:\n",
+	Debug_Args( "%s modifications:\n",
 			op->o_log_prefix, 0, 0 );
 
 	for ( tmp = op->orm_modlist; tmp != NULL; tmp = tmp->sml_next ) {
-		Debug( LDAP_DEBUG_ARGS, "\t%s: %s\n",
+		Debug_Args( "\t%s: %s\n",
 			tmp->sml_op == LDAP_MOD_ADD ? "add" :
 				(tmp->sml_op == LDAP_MOD_INCREMENT ? "increment" :
 				(tmp->sml_op == LDAP_MOD_DELETE ? "delete" :
 					"replace")), tmp->sml_type.bv_val, 0 );
 
 		if ( tmp->sml_values == NULL ) {
-			Debug( LDAP_DEBUG_ARGS, "%s\n",
+			Debug_Args( "%s\n",
 			   "\t\tno values", NULL, NULL );
 		} else if ( BER_BVISNULL( &tmp->sml_values[ 0 ] ) ) {
-			Debug( LDAP_DEBUG_ARGS, "%s\n",
+			Debug_Args( "%s\n",
 			   "\t\tzero values", NULL, NULL );
 		} else if ( BER_BVISNULL( &tmp->sml_values[ 1 ] ) ) {
-			Debug( LDAP_DEBUG_ARGS, "%s, length %ld\n",
+			Debug_Args( "%s, length %ld\n",
 			   "\t\tone value", (long) tmp->sml_values[0].bv_len, NULL );
 		} else {
-			Debug( LDAP_DEBUG_ARGS, "%s\n",
+			Debug_Args( "%s\n",
 			   "\t\tmultiple values", NULL, NULL );
 		}
 	}

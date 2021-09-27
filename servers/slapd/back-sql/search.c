@@ -2746,7 +2746,7 @@ send_paged_response(
 	PagedResultsCookie respcookie;
 	struct berval cookie;
 
-	Debug(LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"send_paged_response: lastid=0x%08lx nentries=%d\n", 
 		lastid ? *lastid : 0, rs->sr_nentries, NULL );
 

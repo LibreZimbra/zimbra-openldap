@@ -518,7 +518,7 @@ int ndb_tool_entry_reindex(
 {
 	struct ndb_info *ni = (struct ndb_info *) be->be_private;
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"=> " LDAP_XSTRING(ndb_tool_entry_reindex) "( %ld )\n",
 		(long) id, 0, 0 );
 

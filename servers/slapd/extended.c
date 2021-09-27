@@ -213,7 +213,7 @@ fe_extended( Operation *op, SlapReply *rs )
 
 	op->ore_flags = ext->flags;
 
-	Debug( LDAP_DEBUG_ARGS, "do_extended: oid=%s\n",
+	Debug_Args( "do_extended: oid=%s\n",
 		op->ore_reqoid.bv_val, 0 ,0 );
 
 	{ /* start of OpenLDAP extended operation */

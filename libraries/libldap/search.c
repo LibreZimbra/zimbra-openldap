@@ -367,7 +367,7 @@ ldap_build_search_req(
 			ptr = buf;
 		}
 
-		Debug( LDAP_DEBUG_ARGS, "ldap_build_search_req ATTRS:%s\n", ptr, 0,0 );
+		Debug_Args( "ldap_build_search_req ATTRS:%s\n", ptr, 0,0 );
 	}
 #endif /* LDAP_DEBUG */
 

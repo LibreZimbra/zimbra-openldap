@@ -47,7 +47,7 @@ mdb_delete( Operation *op, SlapReply *rs )
 	int settle = 0;
 #endif
 
-	Debug( LDAP_DEBUG_ARGS, "==> " LDAP_XSTRING(mdb_delete) ": %s\n",
+	Debug_Args( "==> " LDAP_XSTRING(mdb_delete) ": %s\n",
 		op->o_req_dn.bv_val, 0, 0 );
 
 #ifdef LDAP_X_TXN
@@ -138,7 +138,7 @@ txnReturn:
 		goto return_results;
 	}
 	if ( rs->sr_err == MDB_NOTFOUND ) {
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- " LDAP_XSTRING(mdb_delete) ": no such object %s\n",
 			op->o_req_dn.bv_val, 0, 0);
 
@@ -185,7 +185,7 @@ txnReturn:
 
 	/* FIXME : dn2entry() should return non-glue entry */
 	if ( rs->sr_err == MDB_NOTFOUND || ( !manageDSAit && is_entry_glue( e ))) {
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"<=- " LDAP_XSTRING(mdb_delete) ": no such object %s\n",
 			op->o_req_dn.bv_val, 0, 0);
 
@@ -313,7 +313,7 @@ txnReturn:
 	if( rs->sr_err != MDB_NOTFOUND ) {
 		switch( rs->sr_err ) {
 		case 0:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"<=- " LDAP_XSTRING(mdb_delete)
 				": non-leaf %s\n",
 				op->o_req_dn.bv_val, 0, 0);
@@ -321,7 +321,7 @@ txnReturn:
 			rs->sr_text = "subordinate objects must be deleted first";
 			break;
 		default:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"<=- " LDAP_XSTRING(mdb_delete)
 				": has_children failed: %s (%d)\n",
 				mdb_strerror(rs->sr_err), rs->sr_err, 0 );
@@ -389,7 +389,7 @@ txnReturn:
 			case 0:
 				break;
 			default:
-				Debug(LDAP_DEBUG_ARGS,
+				Debug_Args(
 					"<=- " LDAP_XSTRING(mdb_delete)
 					": has_children failed: %s (%d)\n",
 					mdb_strerror(rs->sr_err), rs->sr_err, 0 );

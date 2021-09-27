@@ -182,7 +182,7 @@ ldap_back_exop_passwd(
 
 	isproxy = ber_bvcmp( &ndn, &op->o_ndn );
 
-	Debug( LDAP_DEBUG_ARGS, "==> ldap_back_exop_passwd(\"%s\")%s\n",
+	Debug_Args( "==> ldap_back_exop_passwd(\"%s\")%s\n",
 		dn.bv_val, isproxy ? " (proxy)" : "", 0 );
 
 retry:
@@ -312,7 +312,7 @@ ldap_back_exop_generic(
 	int		do_retry = 1;
 	char		*text = NULL;
 
-	Debug( LDAP_DEBUG_ARGS, "==> ldap_back_exop_generic(%s, \"%s\")\n",
+	Debug_Args( "==> ldap_back_exop_generic(%s, \"%s\")\n",
 		op->ore_reqoid.bv_val, op->o_req_dn.bv_val, 0 );
 	assert( lc != NULL );
 	assert( rs->sr_ctrls == NULL );

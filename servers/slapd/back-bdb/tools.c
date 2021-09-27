@@ -762,7 +762,7 @@ int bdb_tool_entry_reindex(
 	Operation op = {0};
 	Opheader ohdr = {0};
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"=> " LDAP_XSTRING(bdb_tool_entry_reindex) "( %ld )\n",
 		(long) id, 0, 0 );
 	assert( tool_base == NULL );

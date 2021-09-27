@@ -55,7 +55,7 @@ bdb_delete( Operation *op, SlapReply *rs )
 	int settle = 0;
 #endif
 
-	Debug( LDAP_DEBUG_ARGS, "==> " LDAP_XSTRING(bdb_delete) ": %s\n",
+	Debug_Args( "==> " LDAP_XSTRING(bdb_delete) ": %s\n",
 		op->o_req_dn.bv_val, 0, 0 );
 
 #ifdef LDAP_X_TXN
@@ -194,8 +194,7 @@ retry:	/* transaction retry */
 
 	/* FIXME : dn2entry() should return non-glue entry */
 	if ( e == NULL || ( !manageDSAit && is_entry_glue( e ))) {
-		Debug( LDAP_DEBUG_ARGS,
-			"<=- " LDAP_XSTRING(bdb_delete) ": no such object %s\n",
+		Debug_Args( "<=- " LDAP_XSTRING(bdb_delete) ": no such object %s\n",
 			op->o_req_dn.bv_val, 0, 0);
 
 		if ( matched != NULL ) {
@@ -384,16 +383,14 @@ retry:	/* transaction retry */
 		case DB_LOCK_NOTGRANTED:
 			goto retry;
 		case 0:
-			Debug(LDAP_DEBUG_ARGS,
-				"<=- " LDAP_XSTRING(bdb_delete)
+			Debug_Args( "<=- " LDAP_XSTRING(bdb_delete)
 				": non-leaf %s\n",
 				op->o_req_dn.bv_val, 0, 0);
 			rs->sr_err = LDAP_NOT_ALLOWED_ON_NONLEAF;
 			rs->sr_text = "subordinate objects must be deleted first";
 			break;
 		default:
-			Debug(LDAP_DEBUG_ARGS,
-				"<=- " LDAP_XSTRING(bdb_delete)
+			Debug_Args( "<=- " LDAP_XSTRING(bdb_delete)
 				": has_children failed: %s (%d)\n",
 				db_strerror(rs->sr_err), rs->sr_err, 0 );
 			rs->sr_err = LDAP_OTHER;
@@ -482,8 +479,7 @@ retry:	/* transaction retry */
 			case 0:
 				break;
 			default:
-				Debug(LDAP_DEBUG_ARGS,
-					"<=- " LDAP_XSTRING(bdb_delete)
+				Debug_Args( "<=- " LDAP_XSTRING(bdb_delete)
 					": has_children failed: %s (%d)\n",
 					db_strerror(rs->sr_err), rs->sr_err, 0 );
 				rs->sr_err = LDAP_OTHER;

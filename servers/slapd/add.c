@@ -73,7 +73,7 @@ do_add( Operation *op, SlapReply *rs )
 		return SLAPD_DISCONNECT;
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "%s do_add: dn (%s)\n",
+	Debug_Args( "%s do_add: dn (%s)\n",
 		op->o_log_prefix, dn.bv_val, 0 );
 
 	/* get the attrs */
@@ -370,7 +370,7 @@ fe_op_add( Operation *op, SlapReply *rs )
 			}
 		}
 	} else {
-		Debug( LDAP_DEBUG_ARGS, "do_add: no backend support\n", 0, 0, 0 );
+		Debug_Args( "do_add: no backend support\n", 0, 0, 0 );
 		send_ldap_error( op, rs, LDAP_UNWILLING_TO_PERFORM,
 			"operation not supported within namingContext" );
 	}

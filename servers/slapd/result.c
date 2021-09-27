@@ -635,7 +635,7 @@ send_ldap_response(
 		rs->sr_msgid, rs->sr_tag, rc );
 
 	if( rs->sr_ref ) {
-		Debug( LDAP_DEBUG_ARGS, "send_ldap_response: ref=\"%s\"\n",
+		Debug_Args( "send_ldap_response: ref=\"%s\"\n",
 			rs->sr_ref[0].bv_val ? rs->sr_ref[0].bv_val : "NULL",
 			NULL, NULL );
 	}
@@ -858,12 +858,12 @@ slap_send_ldap_result( Operation *op, SlapReply *rs )
 	Debug( LDAP_DEBUG_TRACE,
 		"send_ldap_result: %s p=%d\n",
 		op->o_log_prefix, op->o_protocol, 0 );
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"send_ldap_result: err=%d matched=\"%s\" text=\"%s\"\n",
 		rs->sr_err, rs->sr_matched ? rs->sr_matched : "",
 		rs->sr_text ? rs->sr_text : "" );
 	if( rs->sr_ref ) {
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"send_ldap_result: referral=\"%s\"\n",
 			rs->sr_ref[0].bv_val ? rs->sr_ref[0].bv_val : "NULL",
 			NULL, NULL );

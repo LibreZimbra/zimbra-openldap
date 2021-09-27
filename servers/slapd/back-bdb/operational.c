@@ -100,7 +100,7 @@ retry:
 		break;
 
 	default:
-		Debug(LDAP_DEBUG_ARGS, 
+		Debug_Args(
 			"<=- " LDAP_XSTRING(bdb_hasSubordinates)
 			": has_children failed: %s (%d)\n", 
 			db_strerror(rc), rc, 0 );

@@ -148,6 +148,13 @@ extern void eb_syslog(int pri, const char *fmt, ...);
 
 /* this doesn't below as part of ldap.h */
 #ifdef LDAP_SYSLOG
+#define LogX( level, severity, fmt, ... ) \
+	do { \
+		if ( ldap_debug & (level) ) \
+			lutil_debug( ldap_debug, (level), (fmt), ##__VA_ARGS__); \
+		if ( ldap_syslog & (level) ) \
+			syslog( LDAP_LEVEL_MASK((severity)), (fmt), ##__VA_ARGS__); \
+	} while ( 0 )
 #define Log0( level, severity, fmt )	\
 	do { \
 		if ( ldap_debug & (level) ) \
@@ -209,6 +216,11 @@ extern void eb_syslog(int pri, const char *fmt, ...);
 #define LogTest(level) ( ( ldap_debug | ldap_syslog ) & (level) )
 
 #else /* ! LDAP_SYSLOG */
+#define LogX( level, severity, fmt, ... ) \
+	do { \
+		if ( ldap_debug & (level) ) \
+			lutil_debug( ldap_debug, (level), (fmt), ##__VA_ARGS__); \
+	} while ( 0 )
 #define Log0( level, severity, fmt ) \
 	do { \
 		if ( ldap_debug & (level) ) \
@@ -243,9 +255,11 @@ extern void eb_syslog(int pri, const char *fmt, ...);
 		Log3( (level), 0, (fmt), (arg1), (arg2), (arg3) )
 #define LogTest(level) ( ldap_debug & (level) )
 #endif /* ! LDAP_SYSLOG */
+
 #else /* ! LDAP_DEBUG */
 /* TODO: in case LDAP_DEBUG is undefined, make sure logs with appropriate
  * severity gets thru anyway */
+#define LogX( level, severity, fmt, ...) ((void)(0))
 #define Log0( level, severity, fmt ) ((void)0)
 #define Log1( level, severity, fmt, arg1 ) ((void)0)
 #define Log2( level, severity, fmt, arg1, arg2 ) ((void)0)
@@ -255,6 +269,9 @@ extern void eb_syslog(int pri, const char *fmt, ...);
 #define Debug( level, fmt, arg1, arg2, arg3 ) ((void)0)
 #define LogTest(level) ( 0 )
 #endif /* ! LDAP_DEBUG */
+
+#define Debug_Args(severity, fmt, ...) \
+	LogX(LDAP_DEBUG_ARGS, severity, fmt, ##__VA_ARGS__)
 
 /* Actually now in liblber/debug.c */
 LDAP_LUTIL_F(int) lutil_debug_file LDAP_P(( FILE *file ));

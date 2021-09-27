@@ -35,8 +35,7 @@ bdb_bind( Operation *op, SlapReply *rs )
 	DB_TXN		*rtxn;
 	DB_LOCK		lock;
 
-	Debug( LDAP_DEBUG_ARGS,
-		"==> " LDAP_XSTRING(bdb_bind) ": dn: %s\n",
+	Debug_Args( "==> " LDAP_XSTRING(bdb_bind) ": dn: %s\n",
 		op->o_req_dn.bv_val, 0, 0);
 
 	/* allow noauth binds */

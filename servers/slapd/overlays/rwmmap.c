@@ -844,7 +844,7 @@ rwm_filter_map_rewrite(
 			*fstr = ftmp;
 		}
 
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"[rw] %s: \"%s\" -> \"%s\"\n",
 			fdc.ctx, ftmp.bv_val, fstr->bv_val );		
 		if ( fstr->bv_val != ftmp.bv_val ) {

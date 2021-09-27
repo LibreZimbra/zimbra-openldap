@@ -251,7 +251,7 @@ retry:	/* transaction retry */
 		case DB_LOCK_NOTGRANTED:
 			goto retry;
 		case 0:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"<=- " LDAP_XSTRING(bdb_modrdn)
 				": non-leaf %s\n",
 				op->o_req_dn.bv_val, 0, 0);
@@ -259,7 +259,7 @@ retry:	/* transaction retry */
 			rs->sr_text = "subtree rename not supported";
 			break;
 		default:
-			Debug(LDAP_DEBUG_ARGS,
+			Debug_Args(
 				"<=- " LDAP_XSTRING(bdb_modrdn)
 				": has_children failed: %s (%d)\n",
 				db_strerror(rs->sr_err), rs->sr_err, 0 );
@@ -696,7 +696,7 @@ retry:	/* transaction retry */
 			case 0:
 				break;
 			default:
-				Debug(LDAP_DEBUG_ARGS,
+				Debug_Args(
 					"<=- " LDAP_XSTRING(bdb_modrdn)
 					": has_children failed: %s (%d)\n",
 					db_strerror(rs->sr_err), rs->sr_err, 0 );

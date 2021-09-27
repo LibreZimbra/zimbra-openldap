@@ -131,13 +131,12 @@ int bdb_modify_internal(
 
 		switch ( mod->sm_op ) {
 		case LDAP_MOD_ADD:
-			Debug(LDAP_DEBUG_ARGS,
-				"bdb_modify_internal: add %s\n",
+			Debug_Args( "bdb_modify_internal: add %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			err = modify_add_values( e, mod, get_permissiveModify(op),
 				text, textbuf, textlen );
 			if( err != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "bdb_modify_internal: %d %s\n",
+				Debug_Args( "bdb_modify_internal: %d %s\n",
 					err, *text, 0);
 			}
 			break;
@@ -148,13 +147,12 @@ int bdb_modify_internal(
 				break;
 			}
 
-			Debug(LDAP_DEBUG_ARGS,
-				"bdb_modify_internal: delete %s\n",
+			Debug_Args( "bdb_modify_internal: delete %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			err = modify_delete_values( e, mod, get_permissiveModify(op),
 				text, textbuf, textlen );
 			if( err != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "bdb_modify_internal: %d %s\n",
+				Debug_Args( "bdb_modify_internal: %d %s\n",
 					err, *text, 0);
 			} else {
 				got_delete = 1;
@@ -162,13 +160,12 @@ int bdb_modify_internal(
 			break;
 
 		case LDAP_MOD_REPLACE:
-			Debug(LDAP_DEBUG_ARGS,
-				"bdb_modify_internal: replace %s\n",
+			Debug_Args( "bdb_modify_internal: replace %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			err = modify_replace_values( e, mod, get_permissiveModify(op),
 				text, textbuf, textlen );
 			if( err != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "bdb_modify_internal: %d %s\n",
+				Debug_Args("bdb_modify_internal: %d %s\n",
 					err, *text, 0);
 			} else {
 				got_delete = 1;
@@ -176,14 +173,12 @@ int bdb_modify_internal(
 			break;
 
 		case LDAP_MOD_INCREMENT:
-			Debug(LDAP_DEBUG_ARGS,
-				"bdb_modify_internal: increment %s\n",
+			Debug_Args("bdb_modify_internal: increment %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
 			err = modify_increment_values( e, mod, get_permissiveModify(op),
 				text, textbuf, textlen );
 			if( err != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS,
-					"bdb_modify_internal: %d %s\n",
+				Debug_Args("bdb_modify_internal: %d %s\n",
 					err, *text, 0);
 			} else {
 				got_delete = 1;
@@ -191,8 +186,7 @@ int bdb_modify_internal(
 			break;
 
 		case SLAP_MOD_SOFTADD:
-			Debug(LDAP_DEBUG_ARGS,
-				"bdb_modify_internal: softadd %s\n",
+			Debug_Args("bdb_modify_internal: softadd %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
  			/* Avoid problems in index_add_mods()
  			 * We need to add index if necessary.
@@ -209,14 +203,13 @@ int bdb_modify_internal(
  			}
 
 			if( err != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "bdb_modify_internal: %d %s\n",
+				Debug_Args("bdb_modify_internal: %d %s\n",
 					err, *text, 0);
 			}
  			break;
 
 		case SLAP_MOD_SOFTDEL:
-			Debug(LDAP_DEBUG_ARGS,
-				"bdb_modify_internal: softdel %s\n",
+			Debug_Args("bdb_modify_internal: softdel %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
  			/* Avoid problems in index_delete_mods()
  			 * We need to add index if necessary.
@@ -235,7 +228,7 @@ int bdb_modify_internal(
  			}
 
 			if( err != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "bdb_modify_internal: %d %s\n",
+				Debug_Args("bdb_modify_internal: %d %s\n",
 					err, *text, 0);
 			}
  			break;
@@ -247,8 +240,7 @@ int bdb_modify_internal(
 				break;
 			}
 
-			Debug(LDAP_DEBUG_ARGS,
-				"bdb_modify_internal: add_if_not_present %s\n",
+			Debug_Args("bdb_modify_internal: add_if_not_present %s\n",
 				mod->sm_desc->ad_cname.bv_val, 0, 0);
  			/* Avoid problems in index_add_mods()
  			 * We need to add index if necessary.
@@ -261,7 +253,7 @@ int bdb_modify_internal(
  			mod->sm_op = SLAP_MOD_ADD_IF_NOT_PRESENT;
 
 			if( err != LDAP_SUCCESS ) {
-				Debug(LDAP_DEBUG_ARGS, "bdb_modify_internal: %d %s\n",
+				Debug_Args("bdb_modify_internal: %d %s\n",
 					err, *text, 0);
 			}
  			break;
@@ -271,7 +263,7 @@ int bdb_modify_internal(
 				mod->sm_op, 0, 0);
 			*text = "Invalid modify operation";
 			err = LDAP_OTHER;
-			Debug(LDAP_DEBUG_ARGS, "bdb_modify_internal: %d %s\n",
+			Debug_Args("bdb_modify_internal: %d %s\n",
 				err, *text, 0);
 		}
 
@@ -470,7 +462,7 @@ bdb_modify( Operation *op, SlapReply *rs )
 	int settle = 0;
 #endif
 
-	Debug( LDAP_DEBUG_ARGS, LDAP_XSTRING(bdb_modify) ": %s\n",
+	Debug_Args(LDAP_XSTRING(bdb_modify) ": %s\n",
 		op->o_req_dn.bv_val, 0, 0 );
 
 #ifdef LDAP_X_TXN

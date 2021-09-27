@@ -544,8 +544,7 @@ bdb_idl_fetch_key(
 
 	char keybuf[16];
 
-	Debug( LDAP_DEBUG_ARGS,
-		"bdb_idl_fetch_key: %s\n", 
+	Debug_Args("bdb_idl_fetch_key: %s\n", 
 		bdb_show_key( key, keybuf ), 0, 0 );
 
 	assert( ids != NULL );
@@ -706,8 +705,7 @@ bdb_idl_insert_key(
 
 	{
 		char buf[16];
-		Debug( LDAP_DEBUG_ARGS,
-			"bdb_idl_insert_key: %lx %s\n", 
+		Debug_Args("bdb_idl_insert_key: %lx %s\n", 
 			(long) id, bdb_show_key( key, buf ), 0 );
 	}
 
@@ -917,8 +915,7 @@ bdb_idl_delete_key(
 
 	{
 		char buf[16];
-		Debug( LDAP_DEBUG_ARGS,
-			"bdb_idl_delete_key: %lx %s\n", 
+		Debug_Args("bdb_idl_delete_key: %lx %s\n", 
 			(long) id, bdb_show_key( key, buf ), 0 );
 	}
 	assert( id != NOID );

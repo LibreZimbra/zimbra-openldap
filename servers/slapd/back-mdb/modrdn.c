@@ -537,7 +537,7 @@ txnReturn:
 				case 0:
 					break;
 				default:
-					Debug(LDAP_DEBUG_ARGS,
+					Debug_Args(
 						"<=- " LDAP_XSTRING(mdb_modrdn)
 						": has_children failed: %s (%d)\n",
 						mdb_strerror(rs->sr_err), rs->sr_err, 0 );

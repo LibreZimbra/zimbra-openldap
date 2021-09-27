@@ -1530,7 +1530,7 @@ static int slap_authz_regexp( struct berval *in, struct berval *out,
 		} else {
 			ber_dupbv_x( out, in, ctx );
 		}
-		Debug( LDAP_DEBUG_ARGS,
+		Debug_Args(
 			"[rw] %s: \"%s\" -> \"%s\"\n",
 			context, in->bv_val, out->bv_val );		
 		return 1;

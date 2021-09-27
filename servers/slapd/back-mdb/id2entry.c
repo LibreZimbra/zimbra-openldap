@@ -586,9 +586,9 @@ int mdb_entry_get(
 	int	rc;
 	const char *at_name = at ? at->ad_cname.bv_val : "(null)";
 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"=> mdb_entry_get: ndn: \"%s\"\n", ndn->bv_val, 0, 0 ); 
-	Debug( LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"=> mdb_entry_get: oc: \"%s\", at: \"%s\"\n",
 		oc ? oc->soc_cname.bv_val : "(null)", at_name, 0);
 

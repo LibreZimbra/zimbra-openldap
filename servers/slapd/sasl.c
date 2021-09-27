@@ -599,7 +599,7 @@ slap_sasl_canonicalize(
 
 	*out_len = 0;
 
-	Debug( LDAP_DEBUG_ARGS, "SASL Canonicalize [conn=%ld]: %s=\"%s\"\n",
+	Debug_Args( "SASL Canonicalize [conn=%ld]: %s=\"%s\"\n",
 		conn ? (long) conn->c_connid : -1L,
 		(flags & SASL_CU_AUTHID) ? "authcid" : "authzid",
 		in ? in : "<empty>");
@@ -681,7 +681,7 @@ slap_sasl_canonicalize(
 	names[0] = slap_propnames[which];
 	prop_set( props, names[0], dn.bv_val, dn.bv_len );
 
-	Debug( LDAP_DEBUG_ARGS, "SASL Canonicalize [conn=%ld]: %s=\"%s\"\n",
+	Debug_Args( "SASL Canonicalize [conn=%ld]: %s=\"%s\"\n",
 		conn ? (long) conn->c_connid : -1L, names[0]+1,
 		dn.bv_val ? dn.bv_val : "<EMPTY>" );
 
@@ -723,7 +723,7 @@ slap_sasl_authorize(
 	if ( !conn->c_sasl_bindop ||
 		conn->c_sasl_bindop->orb_method != LDAP_AUTH_SASL ) return SASL_OK;
 
-	Debug( LDAP_DEBUG_ARGS, "SASL proxy authorize [conn=%ld]: "
+	Debug_Args( "SASL proxy authorize [conn=%ld]: "
 		"authcid=\"%s\" authzid=\"%s\"\n",
 		conn ? (long) conn->c_connid : -1L, auth_identity, requested_user );
 	if ( conn->c_sasl_dn.bv_val ) {
@@ -1477,7 +1477,7 @@ int slap_sasl_bind( Operation *op, SlapReply *rs )
 	unsigned reslen = 0;
 	int sc;
 
-	Debug(LDAP_DEBUG_ARGS,
+	Debug_Args(
 		"==> sasl_bind: dn=\"%s\" mech=%s datalen=%ld\n",
 		op->o_req_dn.bv_len ? op->o_req_dn.bv_val : "",
 		op->o_conn->c_sasl_bind_in_progress ? "<continuing>" : 
@@ -1667,7 +1667,7 @@ slap_sasl_setpass( Operation *op, SlapReply *rs )
 		goto done;
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "==> slap_sasl_setpass: \"%s\"\n",
+	Debug_Args( "==> slap_sasl_setpass: \"%s\"\n",
 		id.bv_val ? id.bv_val : "", 0, 0 );
 
 	rs->sr_err = slap_passwd_parse( op->ore_reqdata,
@@ -1735,7 +1735,7 @@ int slap_sasl_getdn( Connection *conn, Operation *op, struct berval *id,
 	assert( conn != NULL );
 	assert( id != NULL );
 
-	Debug( LDAP_DEBUG_ARGS, "slap_sasl_getdn: conn %lu id=%s [len=%lu]\n", 
+	Debug_Args( "slap_sasl_getdn: conn %lu id=%s [len=%lu]\n", 
 		conn->c_connid,
 		BER_BVISNULL( id ) ? "NULL" : ( BER_BVISEMPTY( id ) ? "<empty>" : id->bv_val ),
 		BER_BVISNULL( id ) ? 0 : ( BER_BVISEMPTY( id ) ? 0 :

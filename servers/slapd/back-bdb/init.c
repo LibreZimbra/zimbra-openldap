@@ -120,8 +120,7 @@ bdb_db_open( BackendDB *be, ConfigReply *cr )
 		return -1;
 	}
 
-	Debug( LDAP_DEBUG_ARGS,
-		LDAP_XSTRING(bdb_db_open) ": \"%s\"\n",
+	Debug_Args( LDAP_XSTRING(bdb_db_open) ": \"%s\"\n",
 		be->be_suffix[0].bv_val, 0, 0 );
 
 	/* Check existence of dbenv_home. Any error means trouble */

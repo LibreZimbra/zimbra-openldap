@@ -55,7 +55,7 @@ rewrite_xmap_parse(
 	assert( s != NULL );
 	assert( currpos != NULL );
 
-	Debug( LDAP_DEBUG_ARGS, "rewrite_xmap_parse: %s\n%s%s",
+	Debug_Args( "rewrite_xmap_parse: %s\n%s%s",
 			s, "", "" );
 
 	*currpos = NULL;

@@ -48,7 +48,7 @@ meta_back_add( Operation *op, SlapReply *rs )
 	ldap_back_send_t	retrying = LDAP_BACK_RETRYING;
 	LDAPControl	**ctrls = NULL;
 
-	Debug(LDAP_DEBUG_ARGS, "==> meta_back_add: %s\n",
+	Debug_Args( "==> meta_back_add: %s\n",
 			op->o_req_dn.bv_val, 0, 0 );
 
 	/*

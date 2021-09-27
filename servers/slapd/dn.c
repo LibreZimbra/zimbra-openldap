@@ -804,7 +804,7 @@ dnMatch(
 				value->bv_len );
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "dnMatch %d\n\t\"%s\"\n\t\"%s\"\n",
+	Debug_Args( "dnMatch %d\n\t\"%s\"\n\t\"%s\"\n",
 		match, value->bv_val, asserted->bv_val );
 
 	*matchp = match;
@@ -936,7 +936,7 @@ rdnMatch(
 				value->bv_len );
 	}
 
-	Debug( LDAP_DEBUG_ARGS, "rdnMatch %d\n\t\"%s\"\n\t\"%s\"\n",
+	Debug_Args( "rdnMatch %d\n\t\"%s\"\n\t\"%s\"\n",
 		match, value->bv_val, asserted->bv_val );
 
 	*matchp = match;

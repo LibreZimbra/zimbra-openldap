@@ -1594,7 +1594,7 @@ slapd_daemon_init( const char *urls )
 	int i, j, n, rc;
 	char **u;
 
-	Debug( LDAP_DEBUG_ARGS, "daemon_init: %s\n",
+	Debug_Args( "daemon_init: %s\n",
 		urls ? urls : "<null>", 0, 0 );
 
 	for ( i=0; i<SLAPD_MAX_DAEMON_THREADS; i++ ) {
