@@ -50,7 +50,7 @@ do_add( Operation *op, SlapReply *rs )
 	int		freevals = 1;
 	OpExtraDB oex;
 
-	Debug( LDAP_DEBUG_TRACE, "%s do_add\n",
+	Debug_Trace( "%s do_add\n",
 		op->o_log_prefix, 0, 0 );
 
 	/*

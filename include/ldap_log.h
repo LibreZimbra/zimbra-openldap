@@ -273,6 +273,9 @@ extern void eb_syslog(int pri, const char *fmt, ...);
 #define Debug_Args(severity, fmt, ...) \
 	LogX(LDAP_DEBUG_ARGS, severity, fmt, ##__VA_ARGS__)
 
+#define Debug_Trace(severity, fmt, ...) \
+	LogX(LDAP_DEBUG_TRACE, severity, fmt, ##__VA_ARGS__)
+
 /* Actually now in liblber/debug.c */
 LDAP_LUTIL_F(int) lutil_debug_file LDAP_P(( FILE *file ));
 

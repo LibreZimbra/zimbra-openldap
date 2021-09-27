@@ -2183,7 +2183,7 @@ acl_set_gather( SetCookie *cookie, struct berval *name, AttributeDescription *de
 
 	rc = ldap_url_parse( name->bv_val, &ludp );
 	if ( rc != LDAP_URL_SUCCESS ) {
-		Debug( LDAP_DEBUG_TRACE,
+		Debug_Trace(
 			"%s acl_set_gather: unable to parse URL=\"%s\"\n",
 			cp->asc_op->o_log_prefix, name->bv_val, 0 );
 
@@ -2195,7 +2195,7 @@ acl_set_gather( SetCookie *cookie, struct berval *name, AttributeDescription *de
 	{
 		/* host part must be empty */
 		/* extensions parts must be empty */
-		Debug( LDAP_DEBUG_TRACE,
+		Debug_Trace(
 			"%s acl_set_gather: host/exts must be absent in URL=\"%s\"\n",
 			cp->asc_op->o_log_prefix, name->bv_val, 0 );
 
@@ -2209,7 +2209,7 @@ acl_set_gather( SetCookie *cookie, struct berval *name, AttributeDescription *de
 			&op2.o_req_ndn, cp->asc_op->o_tmpmemctx );
 	BER_BVZERO( &op2.o_req_dn );
 	if ( rc != LDAP_SUCCESS ) {
-		Debug( LDAP_DEBUG_TRACE,
+		Debug_Trace(
 			"%s acl_set_gather: DN=\"%s\" normalize failed\n",
 			cp->asc_op->o_log_prefix, ludp->lud_dn, 0 );
 
@@ -2218,7 +2218,7 @@ acl_set_gather( SetCookie *cookie, struct berval *name, AttributeDescription *de
 
 	op2.o_bd = select_backend( &op2.o_req_ndn, 1 );
 	if ( ( op2.o_bd == NULL ) || ( op2.o_bd->be_search == NULL ) ) {
-		Debug( LDAP_DEBUG_TRACE,
+		Debug_Trace(
 			"%s acl_set_gather: no database could be selected for DN=\"%s\"\n",
 			cp->asc_op->o_log_prefix, op2.o_req_ndn.bv_val, 0 );
 
@@ -2232,7 +2232,7 @@ acl_set_gather( SetCookie *cookie, struct berval *name, AttributeDescription *de
 				cp->asc_op->o_tmpmemctx );
 		op2.ors_filter = str2filter_x( cp->asc_op, op2.ors_filterstr.bv_val );
 		if ( op2.ors_filter == NULL ) {
-			Debug( LDAP_DEBUG_TRACE,
+			Debug_Trace(
 				"%s acl_set_gather: unable to parse filter=\"%s\"\n",
 				cp->asc_op->o_log_prefix, op2.ors_filterstr.bv_val, 0 );
 
@@ -2660,7 +2660,7 @@ regex_matches(
 	};
 
 	if ( acl_string_expand( &bv, pat, dn_matches, val_matches, matches )) {
-		Debug( LDAP_DEBUG_TRACE,
+		Debug_Trace(
 			"expand( \"%s\", \"%s\") failed\n",
 			pat->bv_val, str, 0 );
 		return( 0 );
@@ -2670,7 +2670,7 @@ regex_matches(
 		char error[ACL_BUF_SIZE];
 		regerror( rc, &re, error, sizeof( error ) );
 
-		Debug( LDAP_DEBUG_TRACE,
+		Debug_Trace(
 		    "compile( \"%s\", \"%s\") failed %s\n",
 			pat->bv_val, str, error );
 		return( 0 );
@@ -2679,9 +2679,9 @@ regex_matches(
 	rc = regexec( &re, str, 0, NULL, 0 );
 	regfree( &re );
 
-	Debug( LDAP_DEBUG_TRACE,
+	Debug_Trace(
 	    "=> regex_matches: string:	 %s\n", str, 0, 0 );
-	Debug( LDAP_DEBUG_TRACE,
+	Debug_Trace(
 	    "=> regex_matches: rc: %d %s\n",
 		rc, !rc ? "matches" : "no matches", 0 );
 	return( !rc );

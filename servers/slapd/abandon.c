@@ -38,7 +38,7 @@ do_abandon( Operation *op, SlapReply *rs )
 	Operation	*o;
 	const char	*msg;
 
-	Debug( LDAP_DEBUG_TRACE, "%s do_abandon\n",
+	Debug_Trace( "%s do_abandon\n",
 		op->o_log_prefix, 0, 0 );
 
 	/*
@@ -123,7 +123,7 @@ do_abandon( Operation *op, SlapReply *rs )
 
 	ldap_pvt_thread_mutex_unlock( &op->o_conn->c_mutex );
 
-	Debug( LDAP_DEBUG_TRACE, "%s do_abandon: op=%ld %s\n",
+	Debug_Trace( "%s do_abandon: op=%ld %s\n",
 		op->o_log_prefix, (long) id, msg );
 	return rs->sr_err;
 }
