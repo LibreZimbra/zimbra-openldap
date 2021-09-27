@@ -35,6 +35,10 @@
 static FILE *log_file = NULL;
 static int debug_lastc = '\n';
 
+int ldap_syslog = 0;
+int ldap_syslog_level = 0;
+int ldap_debug = 0;
+
 int lutil_debug_file( FILE *file )
 {
 	log_file = file;
